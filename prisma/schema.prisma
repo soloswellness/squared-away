@@ -1,0 +1,47 @@
+// Open Book Estimate — database schema
+// Run `npx prisma generate` after setting DATABASE_URL, then `npx prisma migrate dev --name init`
+// to create these tables in your database (Supabase/Neon Postgres both work great with this).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// A contractor account. One business, one login.
+model Contractor {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  company   String?
+  state     String   // two-letter state code, e.g. "SC"
+  createdAt DateTime @default(now())
+  quotes    Quote[]
+}
+
+// One estimate a contractor generated and (optionally) sent to a customer.
+model Quote {
+  id           String     @id @default(cuid())
+  contractor   Contractor @relation(fields: [contractorId], references: [id])
+  contractorId String
+
+  jobType      String   // "roof" | "hvac" | "waterheater" | "bathroom"
+  state        String   // two-letter state code the job is in
+  inputs       Json     // whatever the customer/contractor entered (sq ft, tonnage, etc.)
+
+  materials    Float
+  labor        Float
+  overhead     Float
+  profit       Float
+  total        Float
+
+  // Filled in later, once the contractor's actual invoice is in — this is the
+  // real-quote data that improves the pricing engine over time (see project outline,
+  // "Scale" section).
+  actualTotal  Float?
+
+  createdAt    DateTime @default(now())
+}
