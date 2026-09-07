@@ -1,4 +1,4 @@
-# Open Book Estimate
+# Squared Away
 
 A transparent job-cost calculator: contractors and homeowners get a rough price
 for a job, broken into materials, labor, business costs, and profit — nothing
@@ -48,8 +48,8 @@ Five minutes, no coding required:
 ```bash
 git init
 git add -A
-git commit -m "Open Book Estimate MVP"
-gh repo create open-book-estimate --public --source=. --push
+git commit -m "Squared Away MVP"
+gh repo create squared-away --public --source=. --push
 ```
 (No `gh` installed? Create an empty repo at github.com/new instead, then
 `git remote add origin <the URL it gives you>` and `git push -u origin main`.)

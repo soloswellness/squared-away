@@ -92,7 +92,7 @@ export default function Home() {
       <header className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b-4 border-slate-900 pb-4">
         <div>
           <h1 className="text-3xl font-extrabold uppercase tracking-tight text-slate-900">
-            Open Book Estimate
+            Squared Away
           </h1>
           <p className="mt-1 max-w-md text-sm text-slate-500">
             A rough price, with every number shown — so nobody has to just take someone&rsquo;s word for it.

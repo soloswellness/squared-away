@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Open Book Estimate",
+  title: "Squared Away",
   description: "A transparent job-cost calculator for contractors and homeowners.",
 };
 
