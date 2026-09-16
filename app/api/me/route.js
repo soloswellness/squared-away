@@ -7,6 +7,11 @@ export async function GET() {
   const contractorId = cookieStore.get("contractorId")?.value;
   if (!contractorId) return NextResponse.json({ contractor: null });
 
-  const contractor = await prisma.contractor.findUnique({ where: { id: contractorId } });
-  return NextResponse.json({ contractor });
+  try {
+    const contractor = await prisma.contractor.findUnique({ where: { id: contractorId } });
+    return NextResponse.json({ contractor });
+  } catch (err) {
+    console.error("GET /api/me failed:", err);
+    return NextResponse.json({ contractor: null });
+  }
 }

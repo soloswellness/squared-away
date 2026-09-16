@@ -1,6 +1,8 @@
-// Open Book Estimate — database schema
-// Run `npx prisma generate` after setting DATABASE_URL, then `npx prisma migrate dev --name init`
-// to create these tables in your database (Supabase/Neon Postgres both work great with this).
+// Squared Away — database schema
+//
+// Schema changes push automatically on every deploy (see package.json's
+// "vercel-build" script — it runs `prisma db push` before the build), so
+// there is no manual migration step. Just edit this file and push to GitHub.
 
 generator client {
   provider = "prisma-client-js"
@@ -31,6 +33,11 @@ model Quote {
   jobType      String   // "roof" | "hvac" | "waterheater" | "bathroom"
   state        String   // two-letter state code the job is in
   inputs       Json     // whatever the customer/contractor entered (sq ft, tonnage, etc.)
+
+  // Optional context for the printed/PDF version of the quote — not required
+  // to save one, only to put a customer's name and the job site on paper.
+  customerName String?
+  jobAddress   String?
 
   materials    Float
   labor        Float
